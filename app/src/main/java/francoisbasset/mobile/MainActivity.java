@@ -3,17 +3,26 @@ package francoisbasset.mobile;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageView logo = findViewById(R.id.logo);
+        TextView titre = findViewById(R.id.titre);
+
+        logo.setImageResource(R.drawable.latabledesoursons);
+        titre.setText("La Table des Oursons");
 
         WebView wv = findViewById(R.id.webview);
         WebSettings webSettings = wv.getSettings();
@@ -33,14 +42,20 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setAllowFileAccess(true);
         webSettings.setSupportZoom(true);
 
-        wv.setWebViewClient(new WebViewClient());
+        wv.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.setVisibility(View.VISIBLE);
+            }
+        });
         wv.setWebChromeClient(new WebChromeClient() {
-                @Override
-                public void onPermissionRequest(PermissionRequest request) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        request.grant(request.getResources());
-                    }
+            @Override
+            public void onPermissionRequest(PermissionRequest request) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    request.grant(request.getResources());
                 }
+            }
         });
         wv.loadUrl(BuildConfig.url);
     }

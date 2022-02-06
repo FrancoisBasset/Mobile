@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView logo = findViewById(R.id.logo);
         TextView titre = findViewById(R.id.titre);
 
-        logo.setImageResource(R.drawable.latabledesoursons);
-        titre.setText("La Table des Oursons");
+        logo.setImageResource(BuildConfig.LOGO);
+        titre.setText(BuildConfig.TITRE);
 
         WebView wv = findViewById(R.id.webview);
         WebSettings webSettings = wv.getSettings();
@@ -57,6 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        wv.loadUrl(BuildConfig.url);
+        wv.loadUrl(BuildConfig.URL);
     }
 }

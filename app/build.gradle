@@ -28,6 +28,19 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    flavorDimensions "site"
+    productFlavors {
+        latabledesoursons {
+            applicationId "francoisbasset.latabledesoursons"
+            resValue "string", "app_name", "La Table des Oursons"
+            buildConfigField("String", "url", "\"http://192.168.1.21:8000\"")
+
+            manifestPlaceholders = [
+                    appIcon: "@drawable/latabledesoursons"
+            ]
+        }
+    }
 }
 
 dependencies {

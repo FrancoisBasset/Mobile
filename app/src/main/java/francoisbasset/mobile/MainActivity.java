@@ -42,6 +42,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         });
-        wv.loadUrl("http://192.168.1.21:8000/app/scan");
+        wv.loadUrl(BuildConfig.url);
     }
 }

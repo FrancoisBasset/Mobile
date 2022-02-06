@@ -34,7 +34,7 @@ android {
         latabledesoursons {
             applicationId "francoisbasset.latabledesoursons"
             resValue "string", "app_name", "La Table des Oursons"
-            buildConfigField("String", "url", "\"http://192.168.1.21:8000\"")
+            buildConfigField("String", "url", "\"http://192.168.1.21:8000/app/scan\"")
 
             manifestPlaceholders = [
                     appIcon: "@drawable/latabledesoursons"

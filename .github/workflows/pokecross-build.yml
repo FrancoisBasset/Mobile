@@ -59,17 +59,16 @@ jobs:
           disable-animations: true
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: |
-            cd pokecross
-            APK="app/build/outputs/apk/debug/app-debug.apk"
-            adb install -r "$APK"
-            adb shell am force-stop fr.francoisbasset.pokecross || true
-            START_OUTPUT="$(adb shell am start -W -n fr.francoisbasset.pokecross/.MainActivity 2>&1)"
-            echo "$START_OUTPUT"
-            echo "$START_OUTPUT" | grep -q "Status: ok"
+            adb install -r pokecross/app/build/outputs/apk/debug/app-debug.apk
+            adb shell am force-stop fr.francoisbasset.pokecross
+            adb shell am start -W -n fr.francoisbasset.pokecross/.MainActivity > /tmp/pokecross-start.txt
+            cat /tmp/pokecross-start.txt
+            grep -q "Status: ok" /tmp/pokecross-start.txt
             sleep 3
             adb shell pidof fr.francoisbasset.pokecross
 
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: PokeCross-verified-apk

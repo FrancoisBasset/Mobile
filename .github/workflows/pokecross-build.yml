@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - chatgpt/pokecross-apk
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'pokecross/**'
+      - '.github/workflows/pokecross-build.yml'
   workflow_dispatch:
 
 permissions:
